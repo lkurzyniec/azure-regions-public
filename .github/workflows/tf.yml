@@ -24,4 +24,6 @@ jobs:
 
       - name: TF plan
         run: |
-          terraform plan
+          terraform plan -var="region=${REGION}"
+        env:
+          REGION: ${{ secrets.REGION }}
