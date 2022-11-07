@@ -1,7 +1,7 @@
 module "azure_region" {
   source  = "git::https://github.com/lkurzyniec/azure-regions-private"
 
-  azure_region = "South Africa North"
+  location = "South Africa North"
 }
 
 output "region" {
