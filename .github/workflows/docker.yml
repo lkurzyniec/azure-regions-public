@@ -1,0 +1,27 @@
+---
+name: DOCKER
+
+on: [push, workflow_dispatch]
+
+jobs:
+  run-blast:
+    runs-on: ubuntu-latest
+    
+    steps:      
+    - uses: actions/checkout@v3
+
+    - name: Setup GHT
+      run: |
+        git config --global url."https://${TOKEN}@github.com".insteadOf https://github.com
+      env:
+        TOKEN: ${{ secrets.GH_TOKEN }}
+        
+    - run: |
+        terraform init
+
+    - uses: docker/setup-buildx-action@v2
+
+    - name: run blast
+      timeout-minutes: 2
+      run: |
+        docker run --rm -p 5000:5000 -v ${pwd}:/data:ro --security-opt apparmor:unconfined --cap-add=SYS_ADMIN ianyliu/blast-radius-fork
