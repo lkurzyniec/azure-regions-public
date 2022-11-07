@@ -4,6 +4,10 @@ module "azure_region" {
   location = var.region
 }
 
+variable "region" {
+  type = string
+}
+
 output "region" {
   value       = module.azure_region.location_short
   description = "Azure region in short format"
