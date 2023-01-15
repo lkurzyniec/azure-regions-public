@@ -24,4 +24,8 @@ jobs:
     - name: run blast
       timeout-minutes: 2
       run: |
+        pwd
+        echo "----------------"
+        ls -la
+        echo "----------------"
         docker run --rm -p 5000:5000 -v ${pwd}:/data:ro --security-opt apparmor:unconfined --cap-add=SYS_ADMIN ianyliu/blast-radius-fork
